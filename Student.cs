@@ -24,80 +24,134 @@ namespace home_06Sep
         private double[] _homeworkGrades;
         private double[] _examGrades;
         private double[] _classworkGrades;
-        #endregion 
+        #endregion
 
-        public Student(string name, string surname, string patronymic)
+        public Student(string name, string surname, string patronymic, DateTime birthday, int gradeCount = 10)
         {
-            this._name = name;
-            this._surname = surname;
-            this._patronymic = patronymic;
+            _name = name;
+            _surname = surname;
+            _patronymic = patronymic;
+            _birthday = birthday;
+
+            _address = new Address();
+            _tel = "not given";
+
+            _homeworkGrades = new double[gradeCount];
+            _examGrades = new double[gradeCount];
+            _classworkGrades = new double[gradeCount];
+        }
+
+        public Student(string name, string surname, string patronymic, DateTime birthday, Address address, string tel, int gradeCount = 10)
+        {
+            _name = name;
+            _surname = surname;
+            _patronymic = patronymic;
+            _birthday = birthday;
+
+            _address = address;
+            _tel = tel;
+
+            _homeworkGrades = new double[gradeCount];
+            _examGrades = new double[gradeCount];
+            _classworkGrades = new double[gradeCount];
         }
 
         #region Getter
         public string getName()
         {
-            return this._name;
+            return _name;
         }
 
         public string getSurname()
         {
-            return this._surname;
+            return _surname;
         }
 
         public string getPatronymic()
         {
-            return this._patronymic;
+            return _patronymic;
         }
 
         public DateTime getBirthday()
         {
-            return this._birthday;
+            return _birthday;
         }
 
         public Address getAddress()
         {
-            return this._address;
+            return _address;
         }
 
         public string getTel()
         {
-            return this._tel;
+            return _tel;
         }
         #endregion
 
         #region Setter
         public void setName(string name)
         {
-            if (name.Length <= 20) throw new StringInputIsTooLongException("Name's length can't exceed 20");
-            this._name = name;
+            if (name.Length <= 20) throw new StringIsTooLongException("Name's length can't exceed 20");
+            _name = name;
         }
 
         public void setSurname(string surname)
         {
-            if (surname.Length <= 30) throw new StringInputIsTooLongException("Surname's length can't exceed 30");
-            this._surname = surname;
+            if (surname.Length <= 30) throw new StringIsTooLongException("Surname's length can't exceed 30");
+            _surname = surname;
         }
 
         public void setPatronymic(string patronymic)
         {
-            if (patronymic.Length <= 24) throw new StringInputIsTooLongException("Name length can't exceed 24");
-            this._patronymic = patronymic;
+            if (patronymic.Length <= 24) throw new StringIsTooLongException("Name length can't exceed 24");
+            _patronymic = patronymic;
         }
 
         public void setBirthday(DateTime date)
         {
-            if (date.Year == DateTime.Now.Year) throw new InvalidBirthdayInputException("")
-
-
-            if (name.Length <= 20) throw new StringInputIsTooLongException("Name length can't exceed 20 ch");
-            this._name = name;
+            if (date.Year == DateTime.Now.Year) throw new InvalidBirthdayException();
+            if (date.Year < 2017) throw new InvalidBirthdayException();
+            _birthday = date;
         }
 
-        public void setName(string name)
+        public void setAddress(Address address)
         {
-            if (name.Length <= 20) throw new StringInputIsTooLongException("Name length can't exceed 20 ch");
-            this._name = name;
+            _address = address;
+        }
+
+        public void setTel(string tel)
+        {
+            if (tel.Length <= 15) throw new StringIsTooLongException("Telephone number length can't exceed 15 ch");
+            _tel = tel;
         }
         #endregion
+
+        public void printInfo()
+        {
+            Console.WriteLine($"Student {_name} {_surname} {_patronymic}");
+            Console.WriteLine($"Birthday {_birthday}");
+            Console.WriteLine($"Address {_address}");
+            Console.WriteLine($"Tel {_tel}");
+
+            Console.WriteLine("Grades\n");
+
+            Console.WriteLine("Homework");
+            foreach (double grade in _homeworkGrades)
+            {
+                Console.Write(grade + "\t");
+            }
+
+            Console.WriteLine("Exams");
+            foreach (double grade in _examGrades)
+            {
+                Console.Write(grade + "\t");
+            }
+
+            Console.WriteLine("Classwork");
+            foreach (double grade in _classworkGrades)
+            {
+                Console.Write(grade + "\t");
+            }
+        }
     }
 }
