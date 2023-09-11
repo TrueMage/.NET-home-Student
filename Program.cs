@@ -1,4 +1,5 @@
 ﻿using home_06Sep.Exceptions;
+using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace home_06Sep
@@ -7,7 +8,7 @@ namespace home_06Sep
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Name: ");
+            /*Console.WriteLine("Name: ");
             string name = Console.ReadLine();
             if (name.Length >= 20) throw new StringIsTooLongException("Name's length can't exceed 20");
             Console.Clear();
@@ -41,17 +42,30 @@ namespace home_06Sep
 
 
             Student s = new Student(name, surname, patronymic, birthdayFormatted);
+
             s.setTel(tel);
 
             s.printInfo();
 
             s.setAddress(new Address("Kosmonavtov 44", "Odessa", "65017", "Ukraine"));
-            s.printInfo();
+            s.printInfo();*/
 
-            double[] grades = new double[]{ 3.2, 5, 10, 43, 3.4 };
-            s.setHomeworkGrades(grades);
+            Student a = new Student("", "", "", new DateTime(2003, 12, 13));
+            Student s = new Student("", "", "", new DateTime(2003, 12, 13));
+
+            double[] gradesA = new double[] { 3, 5, 10, 5, 4 };
+            double[] gradesS = new double[] { 10, 8, 10, 10, 9 };
+
+            a.HomeworkGrades = gradesA;
+            s.HomeworkGrades = gradesS;
+
+            Console.WriteLine($"A < S = {a < s}");
+
+            if(a) Console.WriteLine("a > 7");
+            else Console.WriteLine("a < 7");
+
             //grades[4] += 5;
-            s.printInfo();
+            //s.printInfo();
         }
     }
 }

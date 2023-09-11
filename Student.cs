@@ -28,6 +28,7 @@ namespace home_06Sep
         private double[] _classworkGrades;
         #endregion
 
+        #region Constructors
         public Student(string name, string surname, string patronymic, DateTime birthday, int gradeCount = 10)
         {
             _name = name;
@@ -57,6 +58,7 @@ namespace home_06Sep
             _examGrades = new double[gradeCount];
             _classworkGrades = new double[gradeCount];
         }
+        #endregion
 
         #region Getter
         public string getName()
@@ -156,6 +158,123 @@ namespace home_06Sep
 
         #endregion
 
+        #region Overloading
+
+        public static bool operator true(Student a)
+        {
+            return a.getAverageHomework() >= 7;
+        }
+
+        public static bool operator false(Student a)
+        {
+            return a.getAverageHomework() < 7;
+        }
+
+
+        public static bool operator ==(Student a, Student b)
+        {
+            if (ReferenceEquals(a, b)) return true;
+            if (((object)a == null) || ((object)b == null)) return false;
+
+            return a.getAverageHomework() == b.getAverageHomework();
+        }
+
+        public static bool operator !=(Student a, Student b)
+        {
+            return !(a == b);
+        }
+
+
+        public static bool operator <(Student a, Student b)
+        {
+            return a.getAverageHomework() < b.getAverageHomework();
+        }
+
+        public static bool operator >(Student a, Student b)
+        {
+            return a.getAverageHomework() > b.getAverageHomework();
+        }
+
+        public static bool operator <=(Student a, Student b)
+        {
+            return a.getAverageHomework() <= b.getAverageHomework();
+        }
+
+        public static bool operator >=(Student a, Student b)
+        {
+            return a.getAverageHomework() >= b.getAverageHomework();
+        }
+        #endregion
+
+        #region Properties
+        public string Name
+        {
+            get { return _name; }
+            set {
+                setName(value);
+            }
+        }
+        public string Surname
+        {
+            get { return _surname; }
+            set
+            {
+                setSurname(value);
+            }
+        }
+        public string Patronymic
+        {
+            get { return _patronymic; }
+            set
+            {
+                setPatronymic(value);
+            }
+        }
+
+        public DateTime Birthday
+        {
+            get { return _birthday; }
+            set { setBirthday(value); }
+        }
+
+        public Address Address // Немного неудачно вышло
+        {
+            get { return Address; }
+            set { setAddress(value); }
+        }
+
+        public string Tel
+        {
+            get { return _tel; }
+            set { setTel(value); }
+        }
+
+        public double[] HomeworkGrades
+        {
+            get { return _homeworkGrades; }
+            set { setHomeworkGrades(value); }
+        }
+        public double[] ExamGrades
+        {
+            get { return _examGrades; }
+            set { setExamGrades(value); }
+        }
+        public double[] ClassworkGrades
+        {
+            get { return _classworkGrades; }
+            set { setClassworkGrades(value); }
+        }
+        #endregion
+
+        public double getAverageHomework()
+        {
+            double sum = 0;
+            foreach(double grade in _homeworkGrades)
+            {
+                sum += grade;
+            }
+            return sum / _homeworkGrades.Length;
+        }
         public void printInfo()
         {
             Console.WriteLine($"Student {_name} {_surname} {_patronymic}");
