@@ -26,15 +26,19 @@ namespace home_06Sep
             string birthday = Console.ReadLine();
             Console.Clear();
 
+
             string[] birthdayArray = birthday.Split('.');
             DateTime birthdayFormatted = new DateTime(Convert.ToInt32(birthdayArray[2]), Convert.ToInt32(birthdayArray[1]), Convert.ToInt32(birthdayArray[0]));
             if (birthdayFormatted.Year == DateTime.Now.Year) throw new InvalidBirthdayException();
             if (birthdayFormatted.Year > 2017) throw new InvalidBirthdayException();
 
+
             Console.WriteLine("Tel. number: ");
             string tel = Console.ReadLine();
             if (tel.Length >= 15) throw new StringIsTooLongException("Telephone number length can't exceed 15 ch");
             Console.Clear();
+
+
 
             Student s = new Student(name, surname, patronymic, birthdayFormatted);
             s.setTel(tel);
@@ -42,6 +46,11 @@ namespace home_06Sep
             s.printInfo();
 
             s.setAddress(new Address("Kosmonavtov 44", "Odessa", "65017", "Ukraine"));
+            s.printInfo();
+
+            double[] grades = new double[]{ 3.2, 5, 10, 43, 3.4 };
+            s.setHomeworkGrades(grades);
+            //grades[4] += 5;
             s.printInfo();
         }
     }

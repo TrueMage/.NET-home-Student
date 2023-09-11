@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using home_06Sep.Exceptions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace home_06Sep
 {
@@ -87,6 +88,20 @@ namespace home_06Sep
         {
             return _tel;
         }
+
+        public double[] getHomeworkGrades()
+        {
+            return _homeworkGrades;
+        }
+        public double[] getExamGrades()
+        {
+            return _examGrades;
+        }
+        public double[] getClassworkGrades()
+        {
+            return _classworkGrades;
+        }
+
         #endregion
 
         #region Setter
@@ -125,6 +140,20 @@ namespace home_06Sep
             if (tel.Length >= 15) throw new StringIsTooLongException("Telephone number length can't exceed 15 ch");
             _tel = tel;
         }
+
+        public void setHomeworkGrades(double[] array)
+        {
+            _homeworkGrades = array;
+        }
+        public void setExamGrades(double[] array)
+        {
+            _examGrades = array;
+        }
+        public void setClassworkGrades(double[] array)
+        {
+            _classworkGrades = array;
+        }
+
         #endregion
 
         public void printInfo()
