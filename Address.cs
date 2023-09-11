@@ -113,6 +113,10 @@ namespace home_06Sep
             if (isEmpty) {
                 Console.WriteLine("not given");
             }
+            else
+            {
+                Console.WriteLine();
+            }
         }
     }
 }

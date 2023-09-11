@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using home_06Sep.Exceptions;
@@ -91,26 +92,26 @@ namespace home_06Sep
         #region Setter
         public void setName(string name)
         {
-            if (name.Length <= 20) throw new StringIsTooLongException("Name's length can't exceed 20");
+            if (name.Length >= 20) throw new StringIsTooLongException("Name's length can't exceed 20");
             _name = name;
         }
 
         public void setSurname(string surname)
         {
-            if (surname.Length <= 30) throw new StringIsTooLongException("Surname's length can't exceed 30");
+            if (surname.Length >= 30) throw new StringIsTooLongException("Surname's length can't exceed 30");
             _surname = surname;
         }
 
         public void setPatronymic(string patronymic)
         {
-            if (patronymic.Length <= 24) throw new StringIsTooLongException("Name length can't exceed 24");
+            if (patronymic.Length >= 24) throw new StringIsTooLongException("Name length can't exceed 24");
             _patronymic = patronymic;
         }
 
         public void setBirthday(DateTime date)
         {
             if (date.Year == DateTime.Now.Year) throw new InvalidBirthdayException();
-            if (date.Year < 2017) throw new InvalidBirthdayException();
+            if (date.Year > 2017) throw new InvalidBirthdayException();
             _birthday = date;
         }
 
@@ -121,7 +122,7 @@ namespace home_06Sep
 
         public void setTel(string tel)
         {
-            if (tel.Length <= 15) throw new StringIsTooLongException("Telephone number length can't exceed 15 ch");
+            if (tel.Length >= 15) throw new StringIsTooLongException("Telephone number length can't exceed 15 ch");
             _tel = tel;
         }
         #endregion
@@ -129,8 +130,9 @@ namespace home_06Sep
         public void printInfo()
         {
             Console.WriteLine($"Student {_name} {_surname} {_patronymic}");
-            Console.WriteLine($"Birthday {_birthday}");
-            Console.WriteLine($"Address {_address}");
+            Console.WriteLine($"Birthday {_birthday.Date}");
+            Console.Write($"Address ");
+            _address.print();
             Console.WriteLine($"Tel {_tel}");
 
             Console.WriteLine("Grades\n");
@@ -141,17 +143,18 @@ namespace home_06Sep
                 Console.Write(grade + "\t");
             }
 
-            Console.WriteLine("Exams");
+            Console.WriteLine("\nExams");
             foreach (double grade in _examGrades)
             {
                 Console.Write(grade + "\t");
             }
 
-            Console.WriteLine("Classwork");
+            Console.WriteLine("\nClasswork");
             foreach (double grade in _classworkGrades)
             {
                 Console.Write(grade + "\t");
             }
+            Console.WriteLine();
         }
     }
 }
