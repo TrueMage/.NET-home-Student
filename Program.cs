@@ -11,7 +11,7 @@ namespace home_06Sep
             // Лучшее закоментить вывод оценок в Student в printInfo для проверки первых
 
             // Add new Student 
-            Group group = new Group(4);
+            /*Group group = new Group(4);
             group.PrintAll();
 
             group.AddNewStudent(new Student());
@@ -34,6 +34,28 @@ namespace home_06Sep
 
             group.RemoveWLowestScoreStudent();
             group.PrintAll();
+*/
+
+            Student stud = new Student();
+            stud.printInfo();
+
+            stud.Name = "Test";
+            stud.printInfo();
+
+            //stud.Name = "Teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeest";
+
+            try
+            {
+                stud.Name = "Teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeest";
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                stud.Name = "Test2";
+            }
+            stud.printInfo();
 
 
             /*Console.WriteLine("Name: ");
