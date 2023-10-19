@@ -8,6 +8,34 @@ namespace home_06Sep
     {
         static void Main(string[] args)
         {
+            // Лучшее закоментить вывод оценок в Student в printInfo для проверки первых
+
+            // Add new Student 
+            Group group = new Group(4);
+            group.PrintAll();
+
+            group.AddNewStudent(new Student());
+            group.PrintAll();
+
+            // Transfer
+            Group groupB = new Group(2);
+            groupB.PrintAll();
+
+            group.TransferStudent(0, groupB);
+            group.PrintAll();
+            groupB.PrintAll();
+
+            // Remove unpassed
+
+            group.RemoveFailedStudents();
+            group.PrintAll();
+
+            // Remove student w lowest score
+
+            group.RemoveWLowestScoreStudent();
+            group.PrintAll();
+
+
             /*Console.WriteLine("Name: ");
             string name = Console.ReadLine();
             if (name.Length >= 20) throw new StringIsTooLongException("Name's length can't exceed 20");
@@ -50,19 +78,19 @@ namespace home_06Sep
             s.setAddress(new Address("Kosmonavtov 44", "Odessa", "65017", "Ukraine"));
             s.printInfo();*/
 
-            Student a = new Student("", "", "", new DateTime(2003, 12, 13));
-            Student s = new Student("", "", "", new DateTime(2003, 12, 13));
+            /*  Student a = new Student("", "", "", new DateTime(2003, 12, 13));
+              Student s = new Student("", "", "", new DateTime(2003, 12, 13));
 
-            double[] gradesA = new double[] { 3, 5, 10, 5, 4 };
-            double[] gradesS = new double[] { 10, 8, 10, 10, 9 };
+              double[] gradesA = new double[] { 3, 5, 10, 5, 4 };
+              double[] gradesS = new double[] { 10, 8, 10, 10, 9 };
 
-            a.HomeworkGrades = gradesA;
-            s.HomeworkGrades = gradesS;
+              a.HomeworkGrades = gradesA;
+              s.HomeworkGrades = gradesS;
 
-            Console.WriteLine($"A < S = {a < s}");
+              Console.WriteLine($"A < S = {a < s}");
 
-            if(a) Console.WriteLine("a > 7");
-            else Console.WriteLine("a < 7");
+              if(a) Console.WriteLine("a > 7");
+              else Console.WriteLine("a < 7");*/
 
             //grades[4] += 5;
             //s.printInfo();

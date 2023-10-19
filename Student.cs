@@ -9,8 +9,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace home_06Sep
 {
-    internal class Student
+    internal class Student : IComparable
     { 
+        Random random = new Random();
         #region Info
         private string _name;
         private string _surname;
@@ -29,6 +30,39 @@ namespace home_06Sep
         #endregion
 
         #region Constructors
+
+        public Student(int gradeCount = 10)
+        {
+            _name = GetRandomName();
+            _surname = GetRandomSurname();
+            _patronymic = GetRandomPatronymic();
+
+            DateTime date = new DateTime(random.Next(2003, 2008), random.Next(1, 12), random.Next(1, 28));
+            _birthday = date;
+
+            _address = new Address();
+            _tel = "not given";
+
+            _homeworkGrades = new double[gradeCount];
+            for (int i = 0; i < _homeworkGrades.Length; i++)
+            {
+                _homeworkGrades[i] = random.Next(0, 12);
+            }
+
+            _examGrades = new double[gradeCount];
+            for (int i = 0; i < _examGrades.Length; i++)
+            {
+                _examGrades[i] = random.Next(0, 12);
+            }
+
+            _classworkGrades = new double[gradeCount];
+            for (int i = 0; i < _classworkGrades.Length; i++)
+            {
+                _classworkGrades[i] = random.Next(0, 12);
+            }
+        }
+
+
         public Student(string name, string surname, string patronymic, DateTime birthday, int gradeCount = 10)
         {
             _name = name;
@@ -40,8 +74,22 @@ namespace home_06Sep
             _tel = "not given";
 
             _homeworkGrades = new double[gradeCount];
+            for(int i = 0; i < _homeworkGrades.Length; i++)
+            {
+                _homeworkGrades[i] = random.Next(0, 12);
+            }
+
             _examGrades = new double[gradeCount];
+            for (int i = 0; i < _examGrades.Length; i++)
+            {
+                _examGrades[i] = random.Next(0, 12);
+            }
+
             _classworkGrades = new double[gradeCount];
+            for (int i = 0; i < _classworkGrades.Length; i++)
+            {
+                _classworkGrades[i] = random.Next(0, 12);
+            }
         }
 
         public Student(string name, string surname, string patronymic, DateTime birthday, Address address, string tel, int gradeCount = 10)
@@ -275,6 +323,17 @@ namespace home_06Sep
             }
             return sum / _homeworkGrades.Length;
         }
+
+        public double getAverageExam()
+        {
+            double sum = 0;
+            foreach (double grade in _examGrades)
+            {
+                sum += grade;
+            }
+            return sum / _examGrades.Length;
+        }
+
         public void printInfo()
         {
             Console.WriteLine($"Student {_name} {_surname} {_patronymic}");
@@ -304,5 +363,101 @@ namespace home_06Sep
             }
             Console.WriteLine();
         }
+
+        /// <summary>
+        /// Changes information about the student
+        /// </summary>
+        public void Edit(Address? address)
+        {
+            Console.Write("New name = ");
+            string newName = Console.ReadLine() ?? _name; // Я знаю, что это не совсем хороший вариант, потому что если нового имени не будет, то код поставит старое, и программе
+                                                          // придётся менять старое имя на старое, что чутка бессмысленно, но я хотел похвастаться использованием ??
+            setName(newName);
+
+            Console.Write("New surname = ");
+            string newSurname = Console.ReadLine() ?? _surname;
+            setSurname(newSurname);
+
+            Console.Write("New patronymic = ");
+            string newPatron = Console.ReadLine() ?? _patronymic;
+            setSurname(newPatron);
+
+            Console.Write("New tel = ");
+            string newTel = Console.ReadLine() ?? _tel;
+            setTel(newTel);
+
+            if(address != null) setAddress(address);
+        }
+
+        #region Private Methods
+        private string GetRandomName()
+        {
+            Random random = new Random();
+
+            string[] names = new string[8]
+            {
+                "Олег",
+                "Андрей",
+                "Дмитрий",
+                "Василий",
+                "Егор",
+                "Никита",
+                "Марк",
+                "Игорь"
+            };
+
+            return names[random.Next(0, names.Length)];
+        }
+
+        private string GetRandomSurname()
+        {
+            Random random = new Random();
+
+            string[] names = new string[10]
+            {
+                "Храмцов",
+                "Громанчук",
+                "Анохин",
+                "Толмачов",
+                "Кобзар",
+                "Загоруйко",
+                "Морозов",
+                "Бутурлакин",
+                "Ткаченко",
+                "Кирлан"
+            };
+
+            return names[random.Next(0, names.Length)];
+        }
+
+        private string GetRandomPatronymic()
+        {
+            Random random = new Random();
+
+            string[] patronymic = new string[4]
+            {
+                "Дмитриевич",
+                "Никитович",
+                "Валерьевич",
+                "Николаевич"
+            };
+
+            return patronymic[random.Next(0, patronymic.Length)];
+        }
+        #endregion
+
+        #region IComparable
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+
+            Student Student2 = obj as Student;
+
+            if (Student2 != null)
+                return this._surname.CompareTo(Student2._surname);
+            else
+                throw new ArgumentException("Object is not a Student");
+        }
+        #endregion
     }
 }
