@@ -79,6 +79,11 @@ namespace home_06Sep
         }
         #endregion
 
+        public Student this[int index]
+        {
+            get { return _students[index]; }
+        }
+
         #region Public Methods
         /// <summary>
         /// Prints information about the group and students
