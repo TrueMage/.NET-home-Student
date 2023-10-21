@@ -1,5 +1,6 @@
 ﻿using home_06Sep.Exceptions;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
@@ -11,7 +12,7 @@ using System.Xml.Linq;
 
 namespace home_06Sep
 {
-    internal class Group
+    internal class Group : IEnumerable
     {
         Random random = new Random();
         private static int _count = 0;
@@ -136,6 +137,11 @@ namespace home_06Sep
             }
         }
 
+        public void Sort(IComparer<Student> comparer = null)
+        {
+            _students.Sort(comparer);
+        }
+
         /// <summary>
         /// Removes a student with lowest homeworks score
         /// </summary>
@@ -165,6 +171,18 @@ namespace home_06Sep
             Console.Write("New specialization = ");
             string newSpec = Console.ReadLine();
             if (newSpec.Length != 0) Spec = newSpec;
+        }
+        #endregion
+
+        #region IEnumerable 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return (IEnumerator)GetEnumerator();
+        }
+
+        public GroupEnum GetEnumerator()
+        {
+            return new GroupEnum(_students);
         }
         #endregion
     }

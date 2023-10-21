@@ -8,6 +8,15 @@ namespace home_06Sep
     {
         static void Main(string[] args)
         {
+            Group group = new Group();
+
+            group.Sort(new Student.DateComparer());
+
+            foreach (Student s in group)
+            { 
+                s.printInfo();
+            }
+
             // Лучшее закоментить вывод оценок в Student в printInfo для проверки первых
 
             // Add new Student 
@@ -36,7 +45,7 @@ namespace home_06Sep
             group.PrintAll();
 */
 
-            Student stud = new Student();
+            /*Student stud = new Student();
             stud.printInfo();
 
             stud.Name = "Test";
@@ -55,7 +64,7 @@ namespace home_06Sep
             {
                 stud.Name = "Test2";
             }
-            stud.printInfo();
+            stud.printInfo();*/
 
 
             /*Console.WriteLine("Name: ");

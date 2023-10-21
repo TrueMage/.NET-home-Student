@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,7 +11,31 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace home_06Sep
 {
     internal class Student : IComparable
-    { 
+    {
+        #region Comparers
+        public class NameComparer : IComparer<Student>
+        {
+            int IComparer<Student>.Compare(Student student1, Student student2)
+            {
+                if (student2 != null && student1 != null)
+                    return student1._name.CompareTo(student2._name);
+                else
+                    throw new ArgumentException("Objects are not Student");
+            }
+        }
+
+        public class DateComparer : IComparer<Student>
+        {
+            int IComparer<Student>.Compare(Student student1, Student student2)
+            {
+                if (student2 != null && student1 != null)
+                    return student1._birthday.CompareTo(student2._birthday);
+                else
+                    throw new ArgumentException("Objects are not Student");
+            }
+        }
+        #endregion
+
         Random random = new Random();
         #region Info
         private string _name;
@@ -314,6 +339,7 @@ namespace home_06Sep
         }
         #endregion
 
+        #region Public Methods
         public double getAverageHomework()
         {
             double sum = 0;
@@ -361,6 +387,7 @@ namespace home_06Sep
             {
                 Console.Write(grade + "\t");
             }
+
             Console.WriteLine();
         }
 
@@ -388,6 +415,7 @@ namespace home_06Sep
 
             if(address != null) setAddress(address);
         }
+        #endregion
 
         #region Private Methods
         private string GetRandomName()
